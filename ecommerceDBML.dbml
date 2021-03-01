@@ -11,7 +11,7 @@ id varchar [pk, increment]
 full_name varchar
 created_at timestamp
 country_code int
-phone varchar
+phone1 varchar
 
 note: "table 'users' contains user information"
 }
