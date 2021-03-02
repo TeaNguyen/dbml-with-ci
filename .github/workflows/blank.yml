@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install dbdocs
-        run: npm install -g dbdocs
+        run: sudo npm install -g dbdocs
         
       - name: check dbdocs
         run: dbdocs
