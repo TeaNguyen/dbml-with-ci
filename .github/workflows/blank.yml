@@ -26,8 +26,6 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Install npm
-        env: 
-          NPM_TOKEN: //npm-staging.dbml.org/:_authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsX2dyb3VwcyI6WyJob2xpc3RpY3MiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiXSwibmFtZSI6ImhvbGlzdGljcyIsImdyb3VwcyI6WyJob2xpc3RpY3MiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiLCJob2xpc3RpY3MiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiXSwiaWF0IjoxNjE0ODU2MDY1LCJuYmYiOjE2MTQ4NTYwNjYsImV4cCI6MTYyMDA0MDA2NX0.iBFbqDAVqL0seoALIIkkxcVo5a5QABMVgOP_YmDyF4g
         run: npm install dbdocs --registry=https://npm-staging.dbml.org/
         
       - name: check dbdocs
