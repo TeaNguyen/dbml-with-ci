@@ -34,7 +34,7 @@ jobs:
       
       - name: build updated dbdocs
         env:
-          GITHUB_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlYU5ndXllbiIsInRva2VuIjoiNmRkODc2MzI4OWQxOWQyNzRjZDJlM2U2NWQxMjIyZDMiLCJpYXQiOjE2MTQ3NjMxNTR9.Cl14TSjAJJVbkkebxigYmbkddJl66M46ndnUY3cve3M
+          DBDOCS_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlYU5ndXllbiIsInRva2VuIjoiNmRkODc2MzI4OWQxOWQyNzRjZDJlM2U2NWQxMjIyZDMiLCJpYXQiOjE2MTQ3NjMxNTR9.Cl14TSjAJJVbkkebxigYmbkddJl66M46ndnUY3cve3M
 
         run: dbci build ./ecommerceDBML.dbml
         
