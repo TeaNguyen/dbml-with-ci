@@ -1,0 +1,2480 @@
+Project holistics {
+  database_type: 'PostgreSQL'
+  note: '''
+    # Markdown cheatsheet
+
+    _(Also see [remarkable][], the markdown parser created by the author of this cheatsheet)_ 
+
+    ## Table of contents
+
+    - [Standard features](#standard-features)
+      * [Headings](#headings)
+      * [Paragraphs](#paragraphs)
+      * [Breaks](#breaks)
+      * [Horizontal Rule](#horizontal-rule)
+      * [Emphasis](#emphasis)
+        + [Bold](#bold)
+        + [Italics](#italics)
+      * [Blockquotes](#blockquotes)
+      * [Lists](#lists)
+        + [Unordered](#unordered)
+        + [Ordered](#ordered)
+        + [Time-saving Tip](#time-saving-tip)
+      * [Code](#code)
+        + [Inline code](#inline-code)
+        + ["Fenced" code block](#fenced-code-block)
+        + [Indented code](#indented-code)
+        + [Syntax highlighting](#syntax-highlighting)
+      * [Links](#links)
+        + [Autolinks](#autolinks)
+        + [Inline links](#inline-links)
+        + [Link titles](#link-titles)
+        + [Named Anchors](#named-anchors)
+      * [Images](#images)
+      * [Raw HTML](#raw-html)
+      * [Escaping with backslashes](#escaping-with-backslashes)
+    - [Non-standard features](#non-standard-features)
+      * [Strikethrough](#strikethrough)
+      * [Todo List](#todo-list)
+      * [Tables](#tables)
+        + [Aligning cells](#aligning-cells)
+      * [Footnotes](#footnotes)
+        + [Inline footnotes](#inline-footnotes)
+      * [Additional Information](#additional-information)
+        + [What is markdown?](#what-is-markdown)
+        + [Other Resources](#other-resources)
+        + [Contributing](#contributing)
+
+    <br>
+    <br>
+
+    # Standard features
+
+    The following markdown features are defined by the [CommonMark][] standard, and are generally supported by all markdown parsers and editors.
+
+    ## Headings
+
+    Headings from `h1` through `h6` are constructed with a `#` for each level:
+
+    ```
+    # h1 Heading
+    ## h2 Heading
+    ### h3 Heading
+    #### h4 Heading
+    ##### h5 Heading
+    ###### h6 Heading
+    ```
+
+    Renders to:
+
+    # h1 Heading
+    ## h2 Heading
+    ### h3 Heading
+    #### h4 Heading
+    ##### h5 Heading
+    ###### h6 Heading
+
+    And this HTML:
+
+    ```html
+    <h1>h1 Heading</h1>
+    <h2>h2 Heading</h2>
+    <h3>h3 Heading</h3>
+    <h4>h4 Heading</h4>
+    <h5>h5 Heading</h5>
+    <h6>h6 Heading</h6>
+    ```
+
+    **A note about "Setext" Headings**
+
+    Note that this document only describes [ATX headings](https://spec.commonmark.org/0.28/#atx-headings), as it is the preferred syntax for writing headings. However, the CommonMark specification also describes [Setext headings](https://spec.commonmark.org/0.28/#setext-headings), a heading format that is denoted by a line of dashes or equal signes following the heading. It's recommended by the author of this guide that you use only ATX headings, as they are easier to write and read in text editors. 
+
+    <br>
+    <br>
+
+    ## Paragraphs
+
+    Body copy written as normal plain-text will be wrapped with `<p></p>` tags in the rendered HTML.
+
+    So this:
+
+    ```
+    Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.
+    ```
+
+    Renders to this HTML:
+
+    ```html
+    <p>Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.</p>
+    ```
+
+    <br>
+    <br>
+
+    ## Breaks
+
+    You can use multiple consecutive newline characters (`\\n`) to create extra spacing between sections in a markdown document. However, if you need to ensure that extra newlines are not collapsed, you can use as many HTML `<br>` elements as you want.
+
+
+    ## Horizontal Rule
+
+    The HTML `<hr>` element is for creating a "thematic break" between paragraph-level elements. In markdown, you can use of the following for this purpose:
+
+    * `___`: three consecutive underscores
+    * `---`: three consecutive dashes
+    * `***`: three consecutive asterisks
+
+    Renders to:
+
+    ___
+
+    ---
+
+    ***
+
+    <br>
+    <br>
+
+    ## Emphasis
+
+    ### Bold
+
+    For emphasizing a snippet of text with a heavier font-weight.
+
+    The following snippet of text is **rendered as bold text**.
+
+    ```
+    **rendered as bold text**
+    ```
+    renders to:
+
+    **rendered as bold text**
+
+    and this HTML
+
+    ```html
+    <strong>rendered as bold text</strong>
+    ```
+
+    ### Italics
+
+    For emphasizing a snippet of text with italics.
+
+    The following snippet of text is _rendered as italicized text_.
+
+    ```
+    _rendered as italicized text_
+    ```
+
+    renders to:
+
+    _rendered as italicized text_
+
+    and this HTML:
+
+    ```html
+    <em>rendered as italicized text</em>
+    ```
+
+    ## Blockquotes
+
+    Used for defining a section of quoting text from another source, within your document.
+
+    To create a blockquote, use `>` before any text you want to quote.
+
+    ```
+    > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante
+    ```
+
+    Renders to:
+
+    > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+
+    And the generated HTML from a markdown parser might look something like this:
+
+    ```html
+    <blockquote>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    </blockquote>
+    ```
+
+    Blockquotes can also be nested:
+
+    ```
+    > Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
+    Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
+    >> Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
+    odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
+    >>> Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
+    Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
+    ```
+
+    Renders to:
+
+    > Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
+    Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
+    >> Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
+    odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
+    >>> Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
+    Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
+
+    <br>
+    <br>
+
+    ## Lists
+
+    ### Unordered
+
+    A list of items in which the order of the items does not explicitly matter.
+
+    You may use any of the following symbols to denote bullets for each list item:
+
+    ```
+    * valid bullet
+    - valid bullet
+    + valid bullet
+    ```
+
+    For example
+
+    ```
+    + Lorem ipsum dolor sit amet
+    + Consectetur adipiscing elit
+    + Integer molestie lorem at massa
+    + Facilisis in pretium nisl aliquet
+    + Nulla volutpat aliquam velit
+      - Phasellus iaculis neque
+      - Purus sodales ultricies
+      - Vestibulum laoreet porttitor sem
+      - Ac tristique libero volutpat at
+    + Faucibus porta lacus fringilla vel
+    + Aenean sit amet erat nunc
+    + Eget porttitor lorem
+    ```
+    Renders to:
+
+    + Lorem ipsum dolor sit amet
+    + Consectetur adipiscing elit
+    + Integer molestie lorem at massa
+    + Facilisis in pretium nisl aliquet
+    + Nulla volutpat aliquam velit
+      - Phasellus iaculis neque
+      - Purus sodales ultricies
+      - Vestibulum laoreet porttitor sem
+      - Ac tristique libero volutpat at
+    + Faucibus porta lacus fringilla vel
+    + Aenean sit amet erat nunc
+    + Eget porttitor lorem
+
+    And this HTML
+
+    ```html
+    <ul>
+      <li>Lorem ipsum dolor sit amet</li>
+      <li>Consectetur adipiscing elit</li>
+      <li>Integer molestie lorem at massa</li>
+      <li>Facilisis in pretium nisl aliquet</li>
+      <li>Nulla volutpat aliquam velit
+        <ul>
+          <li>Phasellus iaculis neque</li>
+          <li>Purus sodales ultricies</li>
+          <li>Vestibulum laoreet porttitor sem</li>
+          <li>Ac tristique libero volutpat at</li>
+        </ul>
+      </li>
+      <li>Faucibus porta lacus fringilla vel</li>
+      <li>Aenean sit amet erat nunc</li>
+      <li>Eget porttitor lorem</li>
+    </ul>
+    ```
+
+    ### Ordered
+
+    A list of items in which the order of items does explicitly matter.
+
+    ```
+    1. Lorem ipsum dolor sit amet
+    2. Consectetur adipiscing elit
+    3. Integer molestie lorem at massa
+    4. Facilisis in pretium nisl aliquet
+    5. Nulla volutpat aliquam velit
+    6. Faucibus porta lacus fringilla vel
+    7. Aenean sit amet erat nunc
+    8. Eget porttitor lorem
+    ```
+    Renders to:
+
+    1. Lorem ipsum dolor sit amet
+    2. Consectetur adipiscing elit
+    3. Integer molestie lorem at massa
+    4. Facilisis in pretium nisl aliquet
+    5. Nulla volutpat aliquam velit
+    6. Faucibus porta lacus fringilla vel
+    7. Aenean sit amet erat nunc
+    8. Eget porttitor lorem
+
+    And this HTML:
+
+    ```html
+    <ol>
+      <li>Lorem ipsum dolor sit amet</li>
+      <li>Consectetur adipiscing elit</li>
+      <li>Integer molestie lorem at massa</li>
+      <li>Facilisis in pretium nisl aliquet</li>
+      <li>Nulla volutpat aliquam velit</li>
+      <li>Faucibus porta lacus fringilla vel</li>
+      <li>Aenean sit amet erat nunc</li>
+      <li>Eget porttitor lorem</li>
+    </ol>
+    ```
+
+    ### Time-saving Tip
+
+    Sometimes lists change, and when they do it's a pain to re-order all of the numbers. Markdown solves this problem by allowing you to simply use `1.` before each item in the list.
+
+    For example:
+
+    ```
+    1. Lorem ipsum dolor sit amet
+    1. Consectetur adipiscing elit
+    1. Integer molestie lorem at massa
+    1. Facilisis in pretium nisl aliquet
+    1. Nulla volutpat aliquam velit
+    1. Faucibus porta lacus fringilla vel
+    1. Aenean sit amet erat nunc
+    1. Eget porttitor lorem
+    ```
+
+    Automatically re-numbers the items and renders to:
+
+    1. Lorem ipsum dolor sit amet
+    2. Consectetur adipiscing elit
+    3. Integer molestie lorem at massa
+    4. Facilisis in pretium nisl aliquet
+    5. Nulla volutpat aliquam velit
+    6. Faucibus porta lacus fringilla vel
+    7. Aenean sit amet erat nunc
+    8. Eget porttitor lorem
+
+    <br>
+    <br>
+
+    ## Code
+
+    ### Inline code
+
+    Wrap inline snippets of code with a single backtick: <code>`</code>.
+
+    For example, to show `<div></div>` inline with other text, just wrap it in backticks.
+
+    ```html
+    For example, to show `<div></div>` inline with other text, just wrap it in backticks.
+    ```
+
+    ### "Fenced" code block
+
+    Three consecutive backticks, referred to as "code fences", are used to denote multiple lines of code: <code>```</code>.
+
+    For example, this:
+
+    <pre>
+    ```html
+    Example text here...
+    ```
+    </pre>
+
+    Appears like this when viewed in a browser:
+
+    ```
+    Example text here...
+    ```
+
+    And renders to something like this in HTML:
+
+    ```html
+    <pre>
+      <p>Example text here...</p>
+    </pre>
+    ```
+
+    ### Indented code
+
+    You may also indent several lines of code by at least four spaces, but this is not recommended as it is harder to read, harder to maintain, and doesn't support syntax highlighting.
+
+    Example:
+
+    ```
+        // Some comments
+        line 1 of code
+        line 2 of code
+        line 3 of code
+    ```
+
+        // Some comments
+        line 1 of code
+        line 2 of code
+        line 3 of code
+
+
+    ### Syntax highlighting
+
+    Various markdown parsers, such as [remarkable](https://github.com/jonschlinkert/remarkable), support syntax highlighting with fenced code blocks. To activate the correct styling for the language inside the code block, simply add the file extension of the language you want to use directly after the first code "fence": <code>```js</code>, and syntax highlighting will automatically be applied in the rendered HTML (if supported by the parser). For example, to apply syntax highlighting to JavaScript code:
+
+    <pre>
+    ```js
+    grunt.initConfig({
+      assemble: {
+        options: {
+          assets: 'docs/assets',
+          data: 'src/data/*.{json,yml}',
+          helpers: 'src/custom-helpers.js',
+          partials: ['src/partials/**/*.{hbs,md}']
+        },
+        pages: {
+          options: {
+            layout: 'default.hbs'
+          },
+          files: {
+            './': ['src/templates/pages/index.hbs']
+          }
+        }
+      }
+    });
+    ```
+    </pre>
+
+    Which renders to:
+
+    ```js
+    grunt.initConfig({
+      assemble: {
+        options: {
+          assets: 'docs/assets',
+          data: 'src/data/*.{json,yml}',
+          helpers: 'src/custom-helpers.js',
+          partials: ['src/partials/**/*.{hbs,md}']
+        },
+        pages: {
+          options: {
+            layout: 'default.hbs'
+          },
+          files: {
+            './': ['src/templates/pages/index.hbs']
+          }
+        }
+      }
+    });
+    ``
+
+    And this complicated HTML is an example of what might be generated by the markdown parser, when syntax highlighting is applied by a library like [highlight.js](https://highlightjs.org/):
+
+    ```xml
+    <div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+      <span class="nx">assemble</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">assets</span><span class="o">:</span> <span class="s1">'docs/assets'</span><span class="p">,</span>
+          <span class="nx">data</span><span class="o">:</span> <span class="s1">'src/data/*.{json,yml}'</span><span class="p">,</span>
+          <span class="nx">helpers</span><span class="o">:</span> <span class="s1">'src/custom-helpers.js'</span><span class="p">,</span>
+          <span class="nx">partials</span><span class="o">:</span> <span class="p">[</span><span class="s1">'src/partials/**/*.{hbs,md}'</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nx">pages</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">layout</span><span class="o">:</span> <span class="s1">'default.hbs'</span>
+          <span class="p">},</span>
+          <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s1">'./'</span><span class="o">:</span> <span class="p">[</span><span class="s1">'src/templates/pages/index.hbs'</span><span class="p">]</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    </pre></div>
+    ```
+
+    <br>
+    <br>
+
+
+    ## Links
+
+    ### Autolinks
+
+    Autolinks are absolute URIs and email addresses inside `<` and `>`. They are parsed as links, where the URI or email address itself is used as the link's label.
+
+    ```
+    <http://foo.bar.baz>
+    ```
+
+    Renders to:
+
+    <http://foo.bar.baz>
+
+    URIs or email addresses that are not wrapped in angle brackets are not recognized as valid autolinks by markdown parsers.
+
+
+    ### Inline links
+
+    ```
+    [Assemble](http://assemble.io)
+    ```
+
+    Renders to (hover over the link, there is no tooltip):
+
+    [Assemble](http://assemble.io)
+
+    HTML:
+
+    ```html
+    <a href="http://assemble.io">Assemble</a>
+    ```
+
+    ### Link titles
+
+    ```
+    [Upstage](https://github.com/upstage/ "Visit Upstage!")
+    ```
+
+    Renders to (hover over the link, there should be a tooltip):
+
+    [Upstage](https://github.com/upstage/ "Visit Upstage!")
+
+    HTML:
+
+    ```html
+    <a href="https://github.com/upstage/" title="Visit Upstage!">Upstage</a>
+    ```
+
+    ### Named Anchors
+
+    Named anchors enable you to jump to the specified anchor point on the same page. For example, each of these chapters:
+
+    ```
+    # Table of Contents
+      * [Chapter 1](#chapter-1)
+      * [Chapter 2](#chapter-2)
+      * [Chapter 3](#chapter-3)
+    ```
+
+    will jump to these sections:
+
+    ```
+    ## Chapter 1 <a name="chapter-1"></a>
+    Content for chapter one.
+
+    ## Chapter 2 <a name="chapter-2"></a>
+    Content for chapter one.
+
+    ## Chapter 3 <a name="chapter-3"></a>
+    Content for chapter one.
+    ```
+
+    **Anchor placement**
+
+    Note that placement of achors is arbitrary, you can put them anywhere you want, not just in headings. This makes adding cross-references easy when writing markdown.
+
+    <br>
+    <br>
+
+
+    ## Images
+
+    Images have a similar syntax to links but include a preceding exclamation point.
+
+    ```
+    ![Minion](http://octodex.github.com/images/minion.png)
+    ```
+
+    ![Minion](http://octodex.github.com/images/minion.png)
+
+    or
+
+    ```
+    ![Alt text](http://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+    ```
+    ![Alt text](http://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+    Like links, Images also have a footnote style syntax
+
+    ```
+    ![Alt text][id]
+    ```
+    ![Alt text][id]
+
+    With a reference later in the document defining the URL location:
+
+    [id]: http://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+    ```
+    [id]: http://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+    ```
+
+    ## Raw HTML
+
+    Any text between `<` and `>` that looks like an HTML tag will be parsed as a raw HTML tag and rendered to HTML without escaping. 
+
+    _(Note that no attempt is made by the markdown parser to validate your HTML)._
+
+    Example:
+
+    ```
+    **Visit <a href="https://github.com">Jon Schlinkert's GitHub Profile</a>.**
+    ```
+
+    Renders to:
+
+    **Visit <a href="https://github.com">Jon Schlinkert's GitHub Profile</a>.**
+
+    ## Escaping with backslashes
+
+    Any ASCII punctuation character may be escaped using a double backslash.
+
+    Example:
+
+    ```
+    \\*this is not italic*
+    ```
+
+    Renders to:
+
+    \\*this is not italic*
+
+
+    # Non-standard features
+
+    The following markdown features are not defined by the [CommonMark][] specification, but they are commonly supported by markdown parsers and editors, as well as sites like GitHub and GitLab.
+
+    ## Strikethrough
+
+    In GFM you can do strickthroughs.
+
+    ```
+    ~~Strike through this text.~~
+    ```
+    Which renders to:
+
+    ~~Strike through this text.~~
+
+    <br>
+    <br>
+
+    ### Todo List
+
+    ```
+    - [ ] Lorem ipsum dolor sit amet
+    - [ ] Consectetur adipiscing elit
+    - [ ] Integer molestie lorem at massa
+    ```
+
+    Renders to:
+
+    - [ ] Lorem ipsum dolor sit amet
+    - [ ] Consectetur adipiscing elit
+    - [ ] Integer molestie lorem at massa
+
+    **Links in todo lists**
+
+    ```
+    - [ ] [foo](#bar)
+    - [ ] [baz](#qux)
+    - [ ] [fez](#faz)
+    ```
+
+    Renders to:
+
+    - [ ] [foo](#bar)
+    - [ ] [baz](#qux)
+    - [ ] [fez](#faz)
+
+    <br>
+    <br>
+
+    ## Tables
+
+    Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header _(this line of dashes is required)_. 
+
+    - pipes do not need to be vertically aligned.
+    - pipes on the left and right sides of the table are sometimes optional
+    - three or more dashes must be used for each cell in the separator row
+
+    Example:
+
+    ```
+    | Option | Description |
+    | ------ | ----------- |
+    | data   | path to data files to supply the data that will be passed into templates. |
+    | engine | engine to be used for processing templates. Handlebars is the default. |
+    | ext    | extension to be used for dest files. |
+    ```
+
+    Renders to:
+
+    | Option | Description |
+    | ------ | ----------- |
+    | data   | path to data files to supply the data that will be passed into templates. |
+    | engine | engine to be used for processing templates. Handlebars is the default. |
+    | ext    | extension to be used for dest files. |
+
+    And this HTML:
+
+    ```html
+    <table>
+      <tr>
+        <th>Option</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>path to data files to supply the data that will be passed into templates.</td>
+      </tr>
+      <tr>
+        <td>engine</td>
+        <td>engine to be used for processing templates. Handlebars is the default.</td>
+      </tr>
+      <tr>
+        <td>ext</td>
+        <td>extension to be used for dest files.</td>
+      </tr>
+    </table>
+    ```
+
+    ### Aligning cells
+
+    **Center text in a column**
+
+    To center the text in a column, add a colon to the middle of the dashes in the row beneath the header.
+
+    ```
+    | Option | Description |
+    | -:- | -:- |
+    | data   | path to data files to supply the data that will be passed into templates. |
+    | engine | engine to be used for processing templates. Handlebars is the default. |
+    | ext    | extension to be used for dest files. |
+    ```
+
+    | Option | Description |
+    | -:- | -:- |
+    | data   | path to data files to supply the data that will be passed into templates. |
+    | engine | engine to be used for processing templates. Handlebars is the default. |
+    | ext    | extension to be used for dest files. |
+
+
+    **Right-align the text in a column**
+
+    To right-align the text in a column, add a colon to the middle of the dashes in the row beneath the header.
+
+    ```
+    | Option | Description |
+    | ------:| -----------:|
+    | data   | path to data files to supply the data that will be passed into templates. |
+    | engine | engine to be used for processing templates. Handlebars is the default. |
+    | ext    | extension to be used for dest files. |
+    ```
+
+    Renders to:
+
+    | Option | Description |
+    | ------:| -----------:|
+    | data   | path to data files to supply the data that will be passed into templates. |
+    | engine | engine to be used for processing templates. Handlebars is the default. |
+    | ext    | extension to be used for dest files. |
+
+    <br>
+    <br>
+
+    ## Footnotes
+
+    > Markdown footnotes are not officially defined by the [CommonMark][] specification. However, the feature is supported by [remarkable][] and other markdown parsers, and it's very useful when available. 
+
+    Markdown footnotes are denoted by an opening square bracket, followed by a caret, followed by a number and a closing square bracket: `[^1]`. 
+
+    ```
+    This is some text[^1] with a footnote reference link.
+    ```
+
+    The accompanying text for the footnote can be added elsewhere in the document using the following syntax: 
+
+    ```
+    [^1]: "This is a footnote"
+    ```
+
+    When rendered to HTML, footnotes are "stacked" by the markdown parser at the bottom of the file, in the order in which the footnotes were defined.
+
+    ### Inline footnotes
+
+    Some [markdown parsers][remarkable] also support inline footnotes. Inline footnotes are written using the following syntax: `[^2 "This is an inline footnote"]`.
+
+    <br>
+    <br>
+
+    ## Additional Information
+
+    ### What is markdown?
+
+    > Markdown is "a plain text format for writing structured documents, based on formatting conventions from email and usenet" -- [CommonMark][]
+
+    Sites like GitHub and Stackoverflow have popularized the use markdown as a plain-text alternative to traditional text editors, for writing things like documentation and comments. 
+
+    ### Other Resources
+
+    - [We've been trained to make paper](https://ben.balter.com/2012/10/19/we-ve-been-trained-to-make-paper/) - A great blog post about why markdown frees us from the shackles of proprietary formats imposed by bloated word processors, such as Microsoft Word.
+    - [CommonMark](https://commonmark.org/) - "A strongly defined, highly compatible specification of Markdown"
+
+    ### Contributing
+
+    All contributions are welcome!
+
+    Please let me know if you find typos, grammar or spelling mistakes, or have a suggestion for improving the cheatsheet (since GitHub does not send notifications for gists, it might be better to contact me on twitter, at [@jonschlinkert](https://twitter.com/jonschlinkert)).
+
+    Thanks for reading!
+
+
+    [remarkable]: https://github.com/jonschlinkert/remarkable
+    [commonmark]: https://commonmark.org/
+  '''
+}
+
+Table "activation_codes" {
+  "id" varchar
+  "activation_type" string
+  "activatable_data" jsonb
+  "settings" jsonb
+  "expired_at" datetime
+  "activatable_type" string
+  "activatable_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "activities" {
+  "id" varchar
+  "trackable_id" integer
+  "trackable_type" string
+  "owner_id" integer
+  "owner_type" string
+  "key" string
+  "parameters" text
+  "recipient_id" integer
+  "recipient_type" string
+  "created_at" datetime
+  "updated_at" datetime
+  "trackable_name" string
+  "ip" string
+  "tenant_id" integer
+  "impersonator_id" integer
+}
+
+Table "adhoc_queries" {
+  "id" varchar
+  "description" text
+  "query" text
+  "owner_id" integer
+  "tenant_id" integer
+  "data_source_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "state" string
+  "start_time" datetime
+  "end_time" datetime
+  "error" string
+  "non_select_query" boolean
+}
+
+Table "annotations" {
+  "id" varchar
+  "title" string
+  "notes" text
+  "date_d" date
+  "created_at" datetime
+  "updated_at" datetime
+  "user_id" integer
+  "tenant_id" integer
+  "deleted_at" datetime
+}
+
+Table "announcements" {
+  "id" varchar
+  "message" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "app_notifications" {
+  "id" varchar
+  "tenant_id" integer
+  "recipient_id" integer
+  "title" string
+  "body" text
+  "read_at" datetime
+  "created_at" datetime
+  "updated_at" datetime
+  "meta_data" jsonb
+}
+
+Table "cache_settings" {
+  "id" varchar
+  "duration" integer
+  "source_id" integer
+  "source_type" string
+  "enabled" boolean
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "client_public_key_usages" {
+  "id" varchar
+  "client_public_key_id" integer
+  "data_source_id" integer
+  "tunnel_port" integer
+  "client_host" string
+  "client_port" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "client_public_keys" {
+  "id" varchar
+  "public_key" string
+  "tenant_id" integer
+  "user_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "color_palettes" {
+  "id" varchar
+  "tenant_id" integer
+  "name" string
+  "colors" jsonb
+  "creator_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "deleted_at" datetime
+}
+
+Table "comments" {
+  "id" varchar
+  "tenant_id" integer
+  "user_id" integer
+  "target_type" string
+  "target_id" integer
+  "content" text
+  "resolved_at" datetime
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "dashboard_widgets" {
+  "id" varchar
+  "dashboard_id" integer
+  "tenant_id" integer
+  "source_type" string
+  "source_id" integer
+  "title" text
+  "data" jsonb
+  "grid" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "dashboards" {
+  "id" varchar
+  "title" string
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "items" jsonb
+  "filters" jsonb
+  "owner_id" integer
+  "category_id" integer
+  "version" integer
+}
+
+Table "data_explores" {
+  "id" varchar
+  "tenant_id" integer
+  "name" string
+  "dimensions" jsonb
+  "measures" jsonb
+  "filters" jsonb
+  "joins" jsonb
+  "settings" jsonb
+  "root_model_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "owner_id" integer
+}
+
+Table "data_imports" {
+  "id" varchar
+  "title" string
+  "description" string
+  "source_type" string
+  "owner_id" integer
+  "dest_ds_id" integer
+  "table_config" jsonb
+  "dest_schema_name" string
+  "dest_table_name" string
+  "schedule_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "source_config" jsonb
+  "import_mode" string
+}
+
+Table "data_model_categories" {
+  "id" varchar
+  "name" string
+  "parent_id" integer
+  "tenant_id" integer
+  "owner_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "data_source_id" integer
+}
+
+Table "data_model_persistences" {
+  "id" varchar
+  "data_model_id" integer
+  "tenant_id" integer
+  "schedule_id" integer
+  "schema_name" string
+  "table_name" string
+  "last_persisted_at" datetime
+  "mode" string
+  "increment_column" string
+  "primary_key_column" string
+  "user_id" integer
+}
+
+Table "data_models" {
+  "id" varchar
+  "tenant_id" integer
+  "data_source_id" integer
+  "backend_id" integer
+  "backend_type" string
+  "name" string
+  "label" string
+  "created_at" datetime
+  "updated_at" datetime
+  "owner_id" integer
+  "dimensions" jsonb
+  "measures" jsonb
+  "filters" jsonb
+  "joins" jsonb
+  "settings" jsonb
+  "category_id" integer
+  "description" text
+  "fields" jsonb
+  "external_fields" jsonb
+}
+
+Table "data_set_categories" {
+  "id" varchar
+  "name" string
+  "parent_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "owner_id" integer
+}
+
+Table "data_sets" {
+  "id" varchar
+  "data_source_id" integer
+  "root_model_id" integer
+  "title" string
+  "description" text
+  "category_id" integer
+  "tenant_id" integer
+  "query_mode" string
+  "created_at" datetime
+  "updated_at" datetime
+  "owner_id" integer
+}
+
+Table "data_source_columns" {
+  "id" varchar
+  "data_source_id" integer
+  "data_source_table_id" integer
+  "column_name" string
+  "column_type" string
+  "created_version_id" integer
+  "deleted_version_id" integer
+  "description" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "data_source_connection_failure_logs" {
+  "id" varchar
+  "user_id" integer
+  "error" string
+  "resolved" boolean
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "data_source_tables" {
+  "id" varchar
+  "data_source_id" integer
+  "schema_name" string
+  "table_name" string
+  "created_version_id" integer
+  "deleted_version_id" integer
+  "description" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "data_source_versions" {
+  "id" varchar
+  "data_source_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "data_sources" {
+  "id" varchar
+  "name" string
+  "dbtype" string
+  "dbconfig" text
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "settings" jsonb
+  "is_sample" boolean
+  "deleted_at" datetime
+}
+
+Table "data_transform_schedules" {
+  "id" varchar
+  "data_transform_id" integer
+  "schedule_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "data_transforms" {
+  "id" varchar
+  "title" string
+  "description" string
+  "data_source_id" integer
+  "data_dest_id" integer
+  "owner_id" integer
+  "query" text
+  "table_config" jsonb
+  "dest_table_name" string
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "dest_schema_name" string
+  "settings" jsonb
+}
+
+Table "data_transports" {
+  "id" varchar
+  "from_ds_id" integer
+  "dest_ds_id" integer
+  "owner_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "configs" jsonb
+}
+
+Table "dm_field_filter_sources" {
+  "id" varchar
+  "data_set_id" integer
+  "field_path" jsonb
+  "user_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "drilldowns" {
+  "id" varchar
+  "from_report_id" integer
+  "dest_report_id" integer
+  "tenant_id" integer
+  "mapping" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "dest_type" string
+  "dest_id" integer
+  "settings" jsonb
+}
+
+Table "dynamic_filter_definitions" {
+  "id" varchar
+  "filter_type" string
+  "label" string
+  "constraints" jsonb
+  "default_condition" jsonb
+  "is_shareable" boolean
+  "filter_source_type" string
+  "filter_source_id" integer
+  "user_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "dynamic_filter_mappings" {
+  "id" varchar
+  "dynamic_filter_id" integer
+  "viz_conditionable_type" string
+  "viz_conditionable_id" integer
+  "field_path" jsonb
+  "user_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "dynamic_filter_presets" {
+  "id" varchar
+  "preset_condition" jsonb
+  "dynamic_filter_id" integer
+  "dynamic_filter_presettable_type" string
+  "dynamic_filter_presettable_id" integer
+  "user_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "dynamic_filter_states" {
+  "id" varchar
+  "data" jsonb
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "dynamic_filters" {
+  "id" varchar
+  "order" integer
+  "dynamic_filter_definition_id" integer
+  "dynamic_filter_holdable_type" string
+  "dynamic_filter_holdable_id" integer
+  "user_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "email_dests" {
+  "id" varchar
+  "title" string
+  "recipients" jsonb
+  "options" jsonb
+}
+
+Table "email_schedule_vars" {
+  "id" varchar
+  "last_execution_time" datetime
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "email_schedules" {
+  "id" varchar
+  "schedule_id" integer
+  "recipients" jsonb
+  "creator_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "title" string
+  "options" jsonb
+  "source_id" integer
+  "source_type" string
+  "dest_id" integer
+  "dest_type" string
+  "test_only" boolean
+}
+
+Table "embed_link_identifier_variables" {
+  "id" varchar
+  "embed_link_id" integer
+  "filter_ownership_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "legacy_customer_filter" boolean
+}
+
+Table "embed_links" {
+  "id" varchar
+  "tenant_id" integer
+  "hash_code" string
+  "title" string
+  "source_type" string
+  "source_id" integer
+  "owner_id" integer
+  "public_user_id" integer
+  "customer_filter_ownership_id" integer
+  "params" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "secret_key" string
+}
+
+Table "embed_reports" {
+  "id" varchar
+  "name" string
+  "type" string
+  "url" string
+  "description" text
+  "notes" text
+  "created_at" datetime
+  "updated_at" datetime
+  "category_id" integer
+  "tenant_id" integer
+}
+
+Table "events" {
+  "id" varchar
+  "event_type" string
+  "data" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+}
+
+Table "favourites" {
+  "id" varchar
+  "user_id" integer
+  "source_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "source_type" string
+}
+
+Table "feature_rules" {
+  "id" varchar
+  "name" string
+  "display_name" string
+  "notes" string
+  "feature_toggle_key" string
+  "feature_toggle_enabled" boolean
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "feature_toggle_dependencies" {
+  "id" varchar
+  "parent_id" integer
+  "dependant_id" integer
+  "dependent_toggle_mode" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "feature_toggle_group_logs" {
+  "id" varchar
+  "group_id" integer
+  "toggle_mode" string
+  "except_tenant_ids" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "feature_toggle_groups" {
+  "id" varchar
+  "name" string
+  "description" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "feature_toggles" {
+  "id" varchar
+  "key" string
+  "toggle_mode" string
+  "except_tenant_ids" jsonb
+  "notes" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "filter_ownerships" {
+  "id" varchar
+  "shared_filter_id" integer
+  "var_name" string
+  "label" string
+  "order" integer
+  "override_default" boolean
+  "default" string
+  "filterable_id" integer
+  "filterable_type" string
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "is_hidden" boolean
+}
+
+Table "filter_values" {
+  "id" varchar
+  "tenant_id" integer
+  "filter_ownership_id" integer
+  "filter_valuable_id" integer
+  "filter_valuable_type" string
+  "value" jsonb
+  "settings" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "follows" {
+  "id" varchar
+  "tenant_id" integer
+  "user_id" integer
+  "target_type" string
+  "target_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "global_configs" {
+  "id" varchar
+  "value" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "notes" text
+}
+
+Table "google_authentications" {
+  "id" varchar
+  "user_id" string
+  "scopes" jsonb
+  "credentials" jsonb
+  "owner_id" integer
+  "action" string
+}
+
+Table "group_memberships" {
+  "id" varchar
+  "user_id" integer
+  "group_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "groups" {
+  "id" varchar
+  "name" string
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+}
+
+Table "gsheet_dests" {
+  "id" varchar
+  "sheet_url" string
+  "sheet_title" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "history_versions" {
+  "id" varchar
+  "versionable_type" string
+  "versionable_id" integer
+  "owner_id" integer
+  "action" string
+  "data" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+}
+
+Table "job_dependencies" {
+  "id" varchar
+  "tenant_id" integer
+  "job_flow_id" integer
+  "job_id" integer
+  "parent_job_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "job_flow_logs" {
+  "id" varchar
+  "tenant_id" integer
+  "job_flow_id" integer
+  "level" string
+  "message" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "job_flows" {
+  "id" varchar
+  "tenant_id" integer
+  "status" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "job_logs" {
+  "id" varchar
+  "job_id" integer
+  "level" string
+  "message" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "jobs" {
+  "id" varchar
+  "source_id" integer
+  "source_type" string
+  "user_id" integer
+  "start_time" datetime
+  "end_time" datetime
+  "status" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "data" jsonb
+  "key" string
+  "stats" jsonb
+  "source_method" string
+  "tag" string
+  "job_flow_id" integer
+}
+
+Table "join_configs" {
+  "id" varchar
+  "data_set_id" integer
+  "join_id" integer
+  "direction" integer
+  "active" boolean
+  "join_on" text
+  "source_model_id" integer
+  "dest_model_id" integer
+  "link_type" text
+}
+
+Table "joins" {
+  "id" varchar
+  "tenant_id" integer
+  "data_source_id" integer
+  "name" string
+  "link_type" string
+  "source_model_id" integer
+  "dest_model_id" integer
+  "join_on" string
+  "created_at" datetime
+  "updated_at" datetime
+  "data_set_id" integer
+}
+
+Table "likes" {
+  "id" varchar
+  "tenant_id" integer
+  "user_id" integer
+  "target_type" string
+  "target_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "list_values" {
+  "id" varchar
+  "tenant_id" integer
+  "key" string
+  "values" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "key_type" string
+}
+
+Table "manual_filter_sources" {
+  "id" varchar
+  "manual_options" jsonb
+  "user_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "metric_headers" {
+  "id" varchar
+  "title" string
+  "description" text
+  "tenant_id" integer
+  "owner_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "metric_sheet_rows" {
+  "id" varchar
+  "metric_sheet_id" integer
+  "tenant_id" integer
+  "source_type" string
+  "source_id" integer
+  "title" string
+  "level" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "metric_sheets" {
+  "id" varchar
+  "title" string
+  "description" string
+  "rows" jsonb
+  "tenant_id" integer
+  "owner_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "model_ownerships" {
+  "id" varchar
+  "data_model_id" integer
+  "modelable_id" integer
+  "modelable_type" string
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "modeling_dependencies" {
+  "id" varchar
+  "object_id" string
+  "object_type" string
+  "dependant_type" string
+  "dependant_id" integer
+  "data_source_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "network_addresses" {
+  "id" varchar
+  "ip" inet
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "object_histories" {
+  "id" varchar
+  "source_type" string
+  "source_id" integer
+  "created_ts" datetime
+  "creator_id" integer
+  "updated_ts" datetime
+  "updater_id" integer
+  "deleted_ts" datetime
+  "deleter_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "object_locks" {
+  "id" varchar
+  "actor_id" integer
+  "subject_id" integer
+  "subject_class" text
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "passwords" {
+  "id" varchar
+  "password_digest" string
+  "secret_key" string
+  "enabled" boolean
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+}
+
+Table "permissions" {
+  "id" varchar
+  "actor_id" integer
+  "actor_class" string
+  "action" string
+  "subject_class" string
+  "subject_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "inherited_from" integer
+}
+
+Table "personal_categories" {
+  "id" varchar
+  "name" string
+  "owner_id" integer
+  "parent_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "personal_items" {
+  "id" varchar
+  "owner_id" integer
+  "category_id" integer
+  "item_type" string
+  "item_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "pgcache_models" {
+  "id" varchar
+  "tenant_id" integer
+  "pgcache_key" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "plan_feature_rules" {
+  "id" varchar
+  "plan_id" integer
+  "feature_rule_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "plan_usage_rules" {
+  "id" varchar
+  "plan_id" integer
+  "usage_rule_id" integer
+  "free_usage_count" decimal
+  "fixed_object_count" decimal
+  "per_additional_usage" decimal
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "plans" {
+  "id" varchar
+  "name" string
+  "base_objects" integer
+  "base_users" integer
+  "base_records" integer
+  "monthly_price" decimal
+  "annually_price" decimal
+  "add_user_price_monthly" decimal
+  "add_100_objects_price_monthly" decimal
+  "add_user_price_annually" decimal
+  "add_100_objects_price_annually" decimal
+  "per_report" decimal
+  "per_filter" decimal
+  "per_static_shareable_link" decimal
+  "per_query_template" decimal
+  "per_permission_syntax" decimal
+  "per_drilldown" decimal
+  "per_email_schedule" decimal
+  "per_scheduled_cache" decimal
+  "per_import" decimal
+  "per_transform" decimal
+  "per_1m_records_monthly" decimal
+  "per_embed_worker_monthly" decimal
+  "visible" boolean
+  "per_metric" decimal
+  "per_dynamic_shareable_link" decimal
+  "group_version" integer
+  "per_etl_schedule" decimal
+  "per_data_schedule" decimal
+  "per_sftp_schedule" decimal
+  "per_gsheet_schedule" decimal
+  "per_shareable_link" decimal
+  "object_exceed_limit" integer
+  "user_exceed_limit" integer
+}
+
+Table "pricing_groups" {
+  "id" varchar
+  "name" string
+  "notes" string
+  "created_at" datetime
+  "updated_at" datetime
+  "pricing_page_url" string
+}
+
+Table "promotion_campaigns" {
+  "id" varchar
+  "code" string
+  "promotion_type" string
+  "start_date" datetime
+  "end_date" datetime
+  "owner" string
+  "description" string
+  "note" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "query_metrics" {
+  "id" varchar
+  "title" string
+  "description" text
+  "query" text
+  "options" text
+  "data_source_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "time_field" string
+  "owner_id" integer
+  "settings" jsonb
+}
+
+Table "query_models" {
+  "id" varchar
+  "tenant_id" integer
+  "data_source_id" integer
+  "query" string
+  "cached_fields" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "query_reports" {
+  "id" varchar
+  "title" string
+  "query" text
+  "description" text
+  "created_at" datetime
+  "updated_at" datetime
+  "category_id" integer
+  "position" integer
+  "owner_id" integer
+  "data_source_id" integer
+  "tenant_id" integer
+  "settings" jsonb
+  "viz" jsonb
+  "is_adhoc" boolean
+  "root_model_id" integer
+  "data_set_id" integer
+  "non_select_query" boolean
+}
+
+Table "query_templates" {
+  "id" varchar
+  "name" string
+  "settings" jsonb
+  "tenant_id" integer
+  "owner_id" integer
+  "text" text
+  "created_at" datetime
+  "updated_at" datetime
+  "variables" jsonb
+  "description" text
+}
+
+Table "report_categories" {
+  "id" varchar
+  "name" string
+  "created_at" datetime
+  "updated_at" datetime
+  "parent_id" integer
+  "is_workbook" boolean
+  "hide_reports" boolean
+  "tenant_id" integer
+  "owner_id" integer
+}
+
+Table "report_user_groupings" {
+  "id" varchar
+  "report_id" integer
+  "user_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "is_fav" boolean
+}
+
+Table "reverse_tunnel_jobs" {
+  "id" varchar
+  "user_id" integer
+  "tenant_id" integer
+  "ds_params" jsonb
+  "tunnel_params" jsonb
+  "status" string
+  "logs" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "scheduled_caches" {
+  "id" varchar
+  "schedule_id" integer
+  "creator_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "title" string
+  "source_id" integer
+  "source_type" string
+  "durations" integer
+  "options" jsonb
+  "is_auto_preload" boolean
+}
+
+Table "schedulers" {
+  "id" varchar
+  "worker_class" string
+  "last_execution_time" datetime
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "schedules" {
+  "id" varchar
+  "repeat" string
+  "start_date" datetime
+  "end_date" datetime
+  "times" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "paused" boolean
+  "tenant_id" integer
+}
+
+Table "sftp_dests" {
+  "id" varchar
+  "data_source_id" integer
+  "file_path" string
+  "format" string
+  "created_at" datetime
+  "updated_at" datetime
+  "separator" string
+  "include_header" boolean
+}
+
+Table "shareable_links" {
+  "id" varchar
+  "hash_code" string
+  "expired_at" datetime
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "title" string
+  "resource_type" string
+  "resource_id" integer
+  "owner_id" integer
+  "public_user_id" integer
+  "password_id" integer
+}
+
+Table "shared_filters" {
+  "id" varchar
+  "name" string
+  "settings" jsonb
+  "tenant_id" integer
+  "data_source_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "deleted_at" datetime
+  "is_adhoc" boolean
+  "schedule_id" integer
+  "stats" jsonb
+  "owner_id" integer
+}
+
+Table "slack_authorizations" {
+  "id" varchar
+  "slack_user_id" string
+  "access_token" string
+  "scope" string
+  "slack_team_id" string
+  "user_id" integer
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "slack_dests" {
+  "id" varchar
+  "slack_team_id" string
+  "slack_channels" jsonb
+  "title" string
+  "message" string
+  "dont_send_when_empty" boolean
+  "created_at" datetime
+  "updated_at" datetime
+  "hide_filters" boolean
+}
+
+Table "slack_states" {
+  "id" varchar
+  "user_id" integer
+  "random_string" string
+  "after_oauth_path" string
+  "pending_job_flow_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "table_models" {
+  "id" varchar
+  "tenant_id" integer
+  "data_source_id" integer
+  "table_name" string
+  "auto_detect_fields" boolean
+  "cached_fields" jsonb
+  "excluded_fields" jsonb
+  "custom_fields" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "data_source_table_id" integer
+  "data_import_id" integer
+}
+
+Table "tenant_domains" {
+  "id" varchar
+  "tenant_id" integer
+  "domain_name" string
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "tenant_job_queues" {
+  "id" varchar
+  "tenant_id" integer
+  "queue" string
+  "limit" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "tenant_s3_buckets" {
+  "id" varchar
+  "bucket_name" string
+  "region" string
+  "access_key_id" string
+  "secret_access_key" string
+  "enabled" boolean
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "tenant_subscriptions" {
+  "id" varchar
+  "trial_extended" boolean
+  "expired_at" datetime
+  "status" string
+  "tenant_id" integer
+  "created_at" datetime
+  "updated_at" datetime
+  "trial_submission_id" integer
+  "zoho" jsonb
+  "plan_id" integer
+  "add_users" integer
+  "add_objects" integer
+  "period_type" string
+  "embed_workers" integer
+  "trial_pricing_group_id" integer
+  "max_restriction_level" string
+}
+
+Table "tenant_usages" {
+  "id" varchar
+  "tenant_id" integer
+  "monthly_moved_records" bigint
+  "created_at" datetime
+  "updated_at" datetime
+}
+
+Table "tenants" {
+  "id" varchar
+  "name" string
+  "created_at" datetime
+  "updated_at" datetime
+  "settings" jsonb
+  "uname" string
+  "duplicated" boolean
+}
+
+Table "trial_submissions" {
+  "id" varchar
+  "ip_address" string
+  "country" string
+  "page_accessed_at" datetime
+  "submitted_at" datetime
+  "first_name" string
+  "last_name" string
+  "email" string
+  "email_validated" boolean
+  "company_name" string
+  "mobile_number" string
+  "mobile_number_validated" boolean
+  "time_zone_offset" float
+  "confirmation_code" string
+  "tenant_id" integer
+  "details" jsonb
+  "admin_creator_id" integer
+}
+
+Table "usage_rules" {
+  "id" varchar
+  "name" string
+  "display_name" string
+  "notes" string
+  "created_at" datetime
+  "updated_at" datetime
+  "order" integer
+  "class_name" string
+}
+
+Table "users" {
+  "id" varchar
+  "allow_authentication_token" boolean
+  "name" string
+  "email" string
+  "role" string
+  "foreign_id" string
+  "encrypted_password" string
+  "reset_password_token" string
+  "reset_password_sent_at" datetime
+  "remember_created_at" datetime
+  "sign_in_count" integer
+  "current_sign_in_at" datetime
+  "last_sign_in_at" datetime
+  "current_sign_in_ip" string
+  "last_sign_in_ip" string
+  "created_at" datetime
+  "updated_at" datetime
+  "tenant_id" integer
+  "authentication_token" string
+  "provider" string
+  "uid" string
+  "settings" jsonb
+  "deleted_at" datetime
+  "invitation_status" string
+  "nux" jsonb
+  "last_visited_node" jsonb
+}
+
+Table "viz_settings" {
+  "id" varchar
+  "source_type" string
+  "source_id" integer
+  "viz_type" integer
+  "fields" jsonb
+  "settings" jsonb
+  "format" jsonb
+  "created_at" datetime
+  "updated_at" datetime
+  "filters" json
+  "adhoc_fields" jsonb
+}
+
+Ref "fk_rails_activities_users":"activities"."impersonator_id" < "users"."id"
+
+Ref "fk_rails_data_model_categories_data_sources":"data_model_categories"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_data_set_categories_tenants":"data_set_categories"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_source_connection_failure_logs_users":"data_source_connection_failure_logs"."user_id" < "users"."id"
+
+Ref "fk_rails_list_values_tenants":"list_values"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_model_ownerships_data_models":"model_ownerships"."data_model_id" < "data_models"."id"
+
+Ref "fk_rails_network_addresses_tenants":"network_addresses"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_personal_items_tenants":"personal_items"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_tenant_s3_buckets_tenants":"tenant_s3_buckets"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_tenant_subscriptions_trial_submissions":"tenant_subscriptions"."trial_submission_id" < "trial_submissions"."id"
+
+Ref "fk_rails_activities_tenants":"activities"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_adhoc_queries_tenants":"adhoc_queries"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_adhoc_queries_data_sources":"adhoc_queries"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_annotations_users":"annotations"."user_id" < "users"."id"
+
+Ref "fk_rails_annotations_tenants":"annotations"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_app_notifications_tenants":"app_notifications"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_cache_settings_tenants":"cache_settings"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_client_public_key_usages_client_public_keys":"client_public_key_usages"."client_public_key_id" < "client_public_keys"."id"
+
+Ref "fk_rails_client_public_key_usages_data_sources":"client_public_key_usages"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_client_public_keys_tenants":"client_public_keys"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_client_public_keys_users":"client_public_keys"."user_id" < "users"."id"
+
+Ref "fk_rails_color_palettes_tenants":"color_palettes"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_comments_tenants":"comments"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_comments_users":"comments"."user_id" < "users"."id"
+
+Ref "fk_rails_dashboard_widgets_dashboards":"dashboard_widgets"."dashboard_id" < "dashboards"."id"
+
+Ref "fk_rails_dashboard_widgets_tenants":"dashboard_widgets"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_dashboards_tenants":"dashboards"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_explores_tenants":"data_explores"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_imports_schedules":"data_imports"."schedule_id" < "schedules"."id"
+
+Ref "fk_rails_data_imports_tenants":"data_imports"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_model_categories_tenants":"data_model_categories"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_model_persistences_data_models":"data_model_persistences"."data_model_id" < "data_models"."id"
+
+Ref "fk_rails_data_model_persistences_tenants":"data_model_persistences"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_model_persistences_schedules":"data_model_persistences"."schedule_id" < "schedules"."id"
+
+Ref "fk_rails_data_model_persistences_users":"data_model_persistences"."user_id" < "users"."id"
+
+Ref "fk_rails_data_models_tenants":"data_models"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_models_data_sources":"data_models"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_data_sets_data_sources":"data_sets"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_data_sets_tenants":"data_sets"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_source_columns_data_sources":"data_source_columns"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_data_source_columns_data_source_tables":"data_source_columns"."data_source_table_id" < "data_source_tables"."id"
+
+Ref "fk_rails_data_source_tables_data_sources":"data_source_tables"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_data_source_versions_data_sources":"data_source_versions"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_data_sources_tenants":"data_sources"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_transform_schedules_data_transforms":"data_transform_schedules"."data_transform_id" < "data_transforms"."id"
+
+Ref "fk_rails_data_transform_schedules_schedules":"data_transform_schedules"."schedule_id" < "schedules"."id"
+
+Ref "fk_rails_data_transforms_data_sources":"data_transforms"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_data_transforms_tenants":"data_transforms"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_data_transports_tenants":"data_transports"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_dm_field_filter_sources_data_sets":"dm_field_filter_sources"."data_set_id" < "data_sets"."id"
+
+Ref "fk_rails_dm_field_filter_sources_users":"dm_field_filter_sources"."user_id" < "users"."id"
+
+Ref "fk_rails_dm_field_filter_sources_tenants":"dm_field_filter_sources"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_drilldowns_tenants":"drilldowns"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_dynamic_filter_definitions_users":"dynamic_filter_definitions"."user_id" < "users"."id"
+
+Ref "fk_rails_dynamic_filter_definitions_tenants":"dynamic_filter_definitions"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_dynamic_filter_mappings_dynamic_filters":"dynamic_filter_mappings"."dynamic_filter_id" < "dynamic_filters"."id"
+
+Ref "fk_rails_dynamic_filter_mappings_users":"dynamic_filter_mappings"."user_id" < "users"."id"
+
+Ref "fk_rails_dynamic_filter_mappings_tenants":"dynamic_filter_mappings"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_dynamic_filter_presets_dynamic_filters":"dynamic_filter_presets"."dynamic_filter_id" < "dynamic_filters"."id"
+
+Ref "fk_rails_dynamic_filter_presets_users":"dynamic_filter_presets"."user_id" < "users"."id"
+
+Ref "fk_rails_dynamic_filter_presets_tenants":"dynamic_filter_presets"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_dynamic_filter_states_tenants":"dynamic_filter_states"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_dynamic_filters_dynamic_filter_definitions":"dynamic_filters"."dynamic_filter_definition_id" < "dynamic_filter_definitions"."id"
+
+Ref "fk_rails_dynamic_filters_users":"dynamic_filters"."user_id" < "users"."id"
+
+Ref "fk_rails_dynamic_filters_tenants":"dynamic_filters"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_email_schedules_schedules":"email_schedules"."schedule_id" < "schedules"."id"
+
+Ref "fk_rails_email_schedules_tenants":"email_schedules"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_embed_link_identifier_variables_embed_links":"embed_link_identifier_variables"."embed_link_id" < "embed_links"."id"
+
+Ref "fk_rails_embed_link_identifier_variables_filter_ownerships":"embed_link_identifier_variables"."filter_ownership_id" < "filter_ownerships"."id"
+
+Ref "fk_rails_embed_links_tenants":"embed_links"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_embed_reports_tenants":"embed_reports"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_events_tenants":"events"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_favourites_users":"favourites"."user_id" < "users"."id"
+
+Ref "fk_rails_feature_toggle_group_logs_groups":"feature_toggle_group_logs"."group_id" < "groups"."id"
+
+Ref "fk_rails_filter_ownerships_shared_filters":"filter_ownerships"."shared_filter_id" < "shared_filters"."id"
+
+Ref "fk_rails_filter_ownerships_tenants":"filter_ownerships"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_filter_values_tenants":"filter_values"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_filter_values_filter_ownerships":"filter_values"."filter_ownership_id" < "filter_ownerships"."id"
+
+Ref "fk_rails_follows_tenants":"follows"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_follows_users":"follows"."user_id" < "users"."id"
+
+Ref "fk_rails_google_authentications_users":"google_authentications"."user_id" < "users"."id"
+
+Ref "fk_rails_group_memberships_users":"group_memberships"."user_id" < "users"."id"
+
+Ref "fk_rails_group_memberships_groups":"group_memberships"."group_id" < "groups"."id"
+
+Ref "fk_rails_groups_tenants":"groups"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_history_versions_tenants":"history_versions"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_job_dependencies_tenants":"job_dependencies"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_job_dependencies_job_flows":"job_dependencies"."job_flow_id" < "job_flows"."id"
+
+Ref "fk_rails_job_dependencies_jobs":"job_dependencies"."job_id" < "jobs"."id"
+
+Ref "fk_rails_job_flow_logs_tenants":"job_flow_logs"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_job_flow_logs_job_flows":"job_flow_logs"."job_flow_id" < "job_flows"."id"
+
+Ref "fk_rails_job_flows_tenants":"job_flows"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_job_logs_jobs":"job_logs"."job_id" < "jobs"."id"
+
+Ref "fk_rails_jobs_users":"jobs"."user_id" < "users"."id"
+
+Ref "fk_rails_jobs_tenants":"jobs"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_jobs_job_flows":"jobs"."job_flow_id" < "job_flows"."id"
+
+Ref "fk_rails_join_configs_data_sets":"join_configs"."data_set_id" < "data_sets"."id"
+
+Ref "fk_rails_join_configs_joins":"join_configs"."join_id" < "joins"."id"
+
+Ref "fk_rails_joins_tenants":"joins"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_joins_data_sources":"joins"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_joins_data_sets":"joins"."data_set_id" < "data_sets"."id"
+
+Ref "fk_rails_likes_tenants":"likes"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_likes_users":"likes"."user_id" < "users"."id"
+
+Ref "fk_rails_manual_filter_sources_users":"manual_filter_sources"."user_id" < "users"."id"
+
+Ref "fk_rails_manual_filter_sources_tenants":"manual_filter_sources"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_metric_headers_tenants":"metric_headers"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_metric_sheet_rows_metric_sheets":"metric_sheet_rows"."metric_sheet_id" < "metric_sheets"."id"
+
+Ref "fk_rails_metric_sheet_rows_tenants":"metric_sheet_rows"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_metric_sheets_tenants":"metric_sheets"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_model_ownerships_tenants":"model_ownerships"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_modeling_dependencies_data_sources":"modeling_dependencies"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_passwords_tenants":"passwords"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_permissions_tenants":"permissions"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_personal_categories_tenants":"personal_categories"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_pgcache_models_tenants":"pgcache_models"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_plan_feature_rules_plans":"plan_feature_rules"."plan_id" < "plans"."id"
+
+Ref "fk_rails_plan_feature_rules_feature_rules":"plan_feature_rules"."feature_rule_id" < "feature_rules"."id"
+
+Ref "fk_rails_plan_usage_rules_plans":"plan_usage_rules"."plan_id" < "plans"."id"
+
+Ref "fk_rails_plan_usage_rules_usage_rules":"plan_usage_rules"."usage_rule_id" < "usage_rules"."id"
+
+Ref "fk_rails_query_metrics_data_sources":"query_metrics"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_query_metrics_tenants":"query_metrics"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_query_models_tenants":"query_models"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_query_models_data_sources":"query_models"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_query_reports_data_sources":"query_reports"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_query_reports_tenants":"query_reports"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_query_reports_data_sets":"query_reports"."data_set_id" < "data_sets"."id"
+
+Ref "fk_rails_query_templates_tenants":"query_templates"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_report_categories_tenants":"report_categories"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_report_user_groupings_users":"report_user_groupings"."user_id" < "users"."id"
+
+Ref "fk_rails_reverse_tunnel_jobs_users":"reverse_tunnel_jobs"."user_id" < "users"."id"
+
+Ref "fk_rails_reverse_tunnel_jobs_tenants":"reverse_tunnel_jobs"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_scheduled_caches_schedules":"scheduled_caches"."schedule_id" < "schedules"."id"
+
+Ref "fk_rails_scheduled_caches_tenants":"scheduled_caches"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_schedules_tenants":"schedules"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_sftp_dests_data_sources":"sftp_dests"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_shareable_links_tenants":"shareable_links"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_shareable_links_passwords":"shareable_links"."password_id" < "passwords"."id"
+
+Ref "fk_rails_shared_filters_tenants":"shared_filters"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_shared_filters_data_sources":"shared_filters"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_shared_filters_schedules":"shared_filters"."schedule_id" < "schedules"."id"
+
+Ref "fk_rails_slack_authorizations_users":"slack_authorizations"."user_id" < "users"."id"
+
+Ref "fk_rails_slack_authorizations_tenants":"slack_authorizations"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_slack_states_users":"slack_states"."user_id" < "users"."id"
+
+Ref "fk_rails_table_models_tenants":"table_models"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_table_models_data_sources":"table_models"."data_source_id" < "data_sources"."id"
+
+Ref "fk_rails_table_models_data_source_tables":"table_models"."data_source_table_id" < "data_source_tables"."id"
+
+Ref "fk_rails_table_models_data_imports":"table_models"."data_import_id" < "data_imports"."id"
+
+Ref "fk_rails_tenant_domains_tenants":"tenant_domains"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_tenant_job_queues_tenants":"tenant_job_queues"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_tenant_subscriptions_tenants":"tenant_subscriptions"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_tenant_subscriptions_plans":"tenant_subscriptions"."plan_id" < "plans"."id"
+
+Ref "fk_rails_tenant_usages_tenants":"tenant_usages"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_trial_submissions_tenants":"trial_submissions"."tenant_id" < "tenants"."id"
+
+Ref "fk_rails_users_tenants":"users"."tenant_id" < "tenants"."id"
+

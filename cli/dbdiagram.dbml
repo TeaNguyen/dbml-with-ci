@@ -1,0 +1,131 @@
+Project dbdiagram {
+  database_type: 'MongoDB'
+  note: '''
+    # DBML - Database Markup Language
+
+    [![Build Status](https://travis-ci.org/holistics/dbml.svg?branch=master)](https://travis-ci.org/holistics/dbml)
+
+
+    DBML (database markup language) is a simple, readable DSL language designed to define database structures.
+
+    For more information, please check out [DBML homepage](https://dbml.org)
+
+    ## Benefits
+
+    - It is simple, flexible and highly human-readable
+    - It is database agnostic, focusing on the essential database structure definition without worrying about the detailed syntaxes of each database
+    - Comes with a free, simple database visualiser at [dbdiagram.io](http://dbdiagram.io)
+
+    ## Example
+
+    Example of a database definition of a simple blogging site:
+
+        Table users {
+            id integer
+            username varchar
+            role varchar
+            created_at timestamp
+        }
+
+        Table posts {
+            id integer [primary key]
+            title varchar
+            body text [note: 'Content of the post']
+            user_id integer
+            created_at timestamp
+        }
+
+        Ref: posts.user_id > users.id // many-to-one
+
+    ## Community Contributions
+
+    * [Emacs Mode for DBML (Contributed by ccod)](https://github.com/ccod/dbd-mode)
+    * [Vim Plugin for DBML (Contributed by jidn)](https://github.com/jidn/vim-dbml)
+    * [VSCode Plugin for DBML by duynvu](https://marketplace.visualstudio.com/items?itemName=duynvu.dbml-language)
+  '''
+}
+
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table users as U  [headercolor: #3498db] {
+  id int [pk, increment] // auto-increment
+  full_name varchar
+  created_at timestamp
+  country_code int
+
+  Note: '''
+    Lorem ipsum dolor, sit \
+amet consectetur adipisicing elit. Fugit totam libero assumenda expedita quis, excepturi mollitia sit, nulla fugiat magnam quos ipsam. Id labore possimus rerum inventore modi itaque sint?
+  '''
+}
+
+Table merchants  [headercolor: #27ae60] {
+  id int [pk]
+  merchant_name varchar
+  country_code int
+  "created at" varchar
+  admin_id int [ref: > U.id] // inline relationship (many-to-one)
+}
+
+Table countries  [headercolor: #16a085] {
+  code int [pk]
+  name varchar
+  continent_name varchar
+ }
+
+// Creating references
+// You can also define relaionship separately
+// > many-to-one; < one-to-many; - one-to-one
+Ref: U.country_code > countries.code  
+Ref: merchants.country_code > countries.code
+
+//----------------------------------------------//
+
+//// -- LEVEL 2
+//// -- Adding column settings
+
+Table order_items  [headercolor: #c0392b] {
+  order_id int [ref: > orders.id]
+  product_id int    
+  quantity int [default: 1] // default value
+}
+
+Ref: order_items.product_id > products.id
+
+Table orders  [headercolor: #2c3e50] {
+  id int [pk] // primary key
+  user_id int [not null, unique]
+  status varchar
+  created_at varchar [note: 'When order created'] // add column note
+}
+
+//----------------------------------------------//
+
+//// -- Level 3 
+//// -- Enum, Indexes
+
+// Enum for 'products' table below
+Enum products_status {
+  out_of_stock
+  in_stock
+  running_low [note: 'less than 20'] // add column note
+}
+
+// Indexes: You can define a single or multi-column index 
+Table products  [headercolor: #f39c12] {
+  id int [pk]
+  name varchar
+  merchant_id int [not null]
+  price int
+  status products_status
+  created_at datetime [default: `now()`]
+  
+  Indexes {
+    (merchant_id, status) [name:'product_status']
+    id [unique]
+  }
+}
+
+Ref: products.merchant_id > merchants.id // many-to-one
