@@ -25,16 +25,17 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      # Runs a single command using the runners shell
-      - name: Install dbdocs
-        run: sudo npm install -g dbci
+      - name: Install npm
+        env: 
+          NPM_TOKEN: //npm-staging.dbml.org/:_authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsX2dyb3VwcyI6WyJob2xpc3RpY3MiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiXSwibmFtZSI6ImhvbGlzdGljcyIsImdyb3VwcyI6WyJob2xpc3RpY3MiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiLCJob2xpc3RpY3MiLCIkYWxsIiwiJGF1dGhlbnRpY2F0ZWQiLCJAYWxsIiwiQGF1dGhlbnRpY2F0ZWQiLCJhbGwiXSwiaWF0IjoxNjE0ODU2MDY1LCJuYmYiOjE2MTQ4NTYwNjYsImV4cCI6MTYyMDA0MDA2NX0.iBFbqDAVqL0seoALIIkkxcVo5a5QABMVgOP_YmDyF4g
+        run: npm install dbdocs --registry=https://npm-staging.dbml.org/
         
       - name: check dbdocs
         run: dbdocs
       
       - name: build updated dbdocs
         env:
-          GITHUB_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlYU5ndXllbiIsInRva2VuIjoiNmRkODc2MzI4OWQxOWQyNzRjZDJlM2U2NWQxMjIyZDMiLCJpYXQiOjE2MTQ3NjMxNTR9.Cl14TSjAJJVbkkebxigYmbkddJl66M46ndnUY3cve3M
+          DBDOCS_TOKEN: yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlYU5ndXllbiIsInRva2VuIjoiMDBmMzI3ZjM2MmU0MjgwNjVjOTNhYTA3NWJhYmZhM2MiLCJpYXQiOjE2MTQ4NTcxNTV9.OONaJZkVsjLxTXY6inzr9NVl_UHSmXpAJEYUGRlaQMg
 
         run: dbdocs build ./ecommerceDBML.dbml
         
