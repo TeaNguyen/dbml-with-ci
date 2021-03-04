@@ -25,10 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: My first action
-        env:
-          GITHUB_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlYU5ndXllbiIsInRva2VuIjoiNmRkODc2MzI4OWQxOWQyNzRjZDJlM2U2NWQxMjIyZDMiLCJpYXQiOjE2MTQ3NjMxNTR9.Cl14TSjAJJVbkkebxigYmbkddJl66M46ndnUY3cve3M
-
       # Runs a single command using the runners shell
       - name: Install dbdocs
         run: sudo npm install -g dbci
@@ -37,5 +33,8 @@ jobs:
         run: dbdocs
       
       - name: build updated dbdocs
+        env:
+          GITHUB_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlYU5ndXllbiIsInRva2VuIjoiNmRkODc2MzI4OWQxOWQyNzRjZDJlM2U2NWQxMjIyZDMiLCJpYXQiOjE2MTQ3NjMxNTR9.Cl14TSjAJJVbkkebxigYmbkddJl66M46ndnUY3cve3M
+
         run: dbdocs build ./ecommerceDBML.dbml
         
