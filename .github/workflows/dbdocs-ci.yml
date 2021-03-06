@@ -26,6 +26,9 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Install dbdocs       
+        run: npm uninstall dbdocs
+      
+      - name: Install dbdocs       
         run: npm install dbdocs
         
       - name: Check dbdocs
