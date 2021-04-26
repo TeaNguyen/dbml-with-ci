@@ -30,6 +30,6 @@ jobs:
       
       - name: Update dbdocs project
         env:
-          DBDOCS_TOKEN: ${{ secrets.DBDOCS_TOKEN }}
+          DBDOCS_TOKEN: ${{ secrets.dbdocs_token }}
         run: dbdocs build ./ecommerceDBML.dbml
         
