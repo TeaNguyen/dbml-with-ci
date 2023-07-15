@@ -2,6 +2,8 @@
 ## Summary
 A single-paragraph context-problem-solution summary. 
 
+![badge](https://img.shields.io/badge/left-right-f39f37)
+
 ![Dependency architecture](https://firebasestorage.googleapis.com/v0/b/second-petal-295822.appspot.com/o/images%2Fworkspaces%2Fyu9IaQVeVM1DgPmNAjJv%2F6Y8ipkSGysYEOouh2Gc8X92DiLF3%2F---figure---IaTyU804lx1lHlcE9YNlm---figure---tKYpRXznSZfoNShcHZQ4vw.svg?alt=media&token=fa9a7d51-497f-407b-9e2f-408791d87c79 "Dependency architecture")
 
 ## Background
