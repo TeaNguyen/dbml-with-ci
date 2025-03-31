@@ -7,12 +7,8 @@ A single-paragraph context-problem-solution summary
 
 ![Dependency architecture](undefined "Dependency architecture")
 
-<iframe  allowfullscreen width="100%" height="315" src="https://dbdocs.io/embed/007944deaf33ef8d449782f61a5bc216/0ba3f061f6bc448e81752d890eeae686"> </iframe>
-
 ## Background
 ![API flow](undefined "API flow")
-
-
 
 Just enough context necessary to frame the rest of the design doc.
 
@@ -20,6 +16,8 @@ Just enough context necessary to frame the rest of the design doc.
  [﻿Product Requirement Doc](https://app.eraser.io/workspace/h0AYLgD9nE5Ji53jezu2) 
 
 ## Problem
+![Figure 1](/.eraser/WYTOBKSygUo9MssCx98h___6Y8ipkSGysYEOouh2Gc8X92DiLF3___---figure---ioBhcDh7yeMx9Ahxkz_S_---figure---SMTXL2mVSALQIf0dmiSlzw.png "Figure 1")
+
 A description of the problem that this design doc is trying to address, the constraints, and why this problem is worth solving now.
 
 ```
